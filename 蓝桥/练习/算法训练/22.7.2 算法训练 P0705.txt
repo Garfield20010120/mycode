@@ -1,0 +1,95 @@
+import java.util.Scanner;
+ //22.7.2蓝桥 算法训练 P0705
+public class Main {
+	static int[] a;
+	static int[] b;
+	static int[] c;
+	static int d;
+	static int[] e;
+public static void main(String[] args) {
+	@SuppressWarnings("resource")
+	Scanner sc=new Scanner(System.in);
+	int n;
+	int m;
+	
+	for (int i = 0; i < 2; i++) {
+		if(i==0) {
+			n=sc.nextInt();
+			d=n;
+			a=new int[n];
+			for (int j = 0; j < n; j++) {
+				a[j]=sc.nextInt();
+			}
+		}
+		if(i==1) {
+			m=sc.nextInt();
+			b=new int[m];
+			d=d+m;
+			for (int j = 0; j < m; j++) {
+				b[j]=sc.nextInt();
+			}
+		}
+	}
+	//相同
+	for (int i = 0; i < a.length; i++) {
+		for (int j = 0; j < b.length; j++) {
+			if(a[i]==b[j]) {
+				System.out.print(a[i]+" ");
+			}
+		}
+	}
+	System.out.println();
+	//两个数组中的所有元素
+	c=new int[d];
+	for (int i = 0; i < a.length; i++) {
+		c[i]=a[i];
+	}
+	int k=0;
+	for (int j = a.length; j < a.length+b.length; j++) {
+		c[j]=b[k++];
+	}
+	for(int i=0;i<c.length-1;i++){//从第0个元素开始到第length-1个为止,相邻两个元素依次比较
+        for(int j=0;j<c.length-1-i;j++){//外层每循环1次,下一次交换次数少比上次1次
+            if(c[j]>c[j+1]){//前面元素比后面大,交换两元素
+                int temp=c[j];
+                c[j]=c[j+1];
+                c[j+1]=temp;
+            }
+        }
+    }
+	e=new int[d];
+	int o=0;
+	int q=0;
+	for (int i = 1; i < c.length; i++) {
+		if(c[i]==c[i-1]) {
+			e[o++]=i;
+		}
+	}
+	System.out.print(c[0]+" ");
+	for (int i = 0; i < c.length; i++) {
+		for (int j = 0; j < e.length; j++) {
+			if(e[j]==i) {
+				q=1;
+			}
+		}
+		if(q==0) {
+			System.out.print(c[i]+" ");
+		}
+		q=0;
+	}
+	System.out.println();
+	//不同
+	int l=0;
+	for (int i = 0; i < a.length; i++) {
+		for (int j = 0; j < b.length; j++) {
+			if(a[i]==b[j]) {
+				l=1;
+			}
+		}
+		if(l==0) {
+			System.out.print(a[i]+" ");
+		}
+		l=0;
+	}
+}
+}
