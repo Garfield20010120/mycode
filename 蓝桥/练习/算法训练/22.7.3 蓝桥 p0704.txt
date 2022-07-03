@@ -1,0 +1,43 @@
+import java.util.Scanner;
+ //蓝桥 p0704
+
+ 
+/*
+一个数如果从左往右读和从右往左读数字是完全相同的，则称这个数为回文数，
+比如898,1221,15651都是回文数。编写一个程序，输入两个整数min和max，然后对于min~max之间的每一个整数（包括min和max），
+如果它既是一个回文数又是一个质数，那么就把它打印出来。要求，回文数和质数的判断都必要要用函数的形式来实现。
+ */
+ 
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int min = sc.nextInt(), max = sc.nextInt();
+        for (int i = min; i <= max; i++) {
+            if (isPalindrome(i) && isPrime(i))
+                System.out.print(i + " ");
+        }
+    }
+ 
+    public static boolean isPalindrome(int x) {
+        if(x == 0)  return true;
+        if(x < 0 || x % 10 == 0)    return false;
+        int rev = 0;
+        while(x > rev) {
+            rev = rev * 10 + x % 10;
+            x /= 10;
+        }
+ 
+        return x == rev || x == rev / 10;
+    }
+ 
+    //判断n是不是素数
+    public static boolean isPrime(int n) {
+        if (n == 1) //1不是质数
+            return false;
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0)
+                return false;
+        }
+        return true;
+    }
+}
