@@ -1,0 +1,39 @@
+
+import java.util.Scanner;
+//22.7.7 蓝桥 贫穷的城市
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int n = scanner.nextInt(), m = scanner.nextInt();
+		int a[][] = new int[n][18], b, c;
+		for (int i = 0; i < n; ++i) {
+			a[i][0] = scanner.nextInt() - 1;
+		}
+		for (int j = 1; j < 18; ++j) {
+			for (int i = 0; i < n; ++i) {
+				a[i][j] = a[a[i][j - 1]][j - 1];
+			}
+		}//上面都是预处理内容
+		int end = 0;
+		//下面是将c拆分为几个2^j
+		for (int i = 0; i < m; ++i) {
+			b = scanner.nextInt() - 1;
+			c = scanner.nextInt();
+			end = b;
+			int count = 0;
+			if (c == 0) {// 因为end=b，不写也没事
+				System.out.print(b + 1 + " ");
+				continue;
+			}
+			while (c != 0) {
+				if (c % 2 == 1)
+					end = a[end][count];
+				c = c / 2;
+				count++;
+			}
+			System.out.print(end + 1 + " ");
+		}
+	}
+}
+
