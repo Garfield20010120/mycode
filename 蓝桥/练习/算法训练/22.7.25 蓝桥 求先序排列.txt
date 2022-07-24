@@ -1,0 +1,40 @@
+#include<iostream>
+#include<algorithm>
+#include<cstdio>
+#include<cstring>
+#include<cmath>
+#include<map>
+#include<vector>
+#include<queue>
+#include<set>
+#define IL inline
+#define x first
+#define y second
+typedef long long ll;
+using namespace std;
+string ans;
+void dfs(string s1,string s2)
+{
+	int len=s2.length();
+	ans+=s2[len-1];
+	string t1,t2,t3,t4;
+	int pos=s1.find(s2[len-1]);
+	t1=s1.substr(0,pos);
+	t2=s1.substr(pos+1);
+	t3=s2.substr(0,pos);
+	t4=s2.substr(pos,len-pos-1);
+	if(t1.size()&&t3.size())	dfs(t1,t3);
+	if(t2.size()&&t4.size())	dfs(t2,t4);
+}
+int main()
+{
+	string s1,s2;
+	cin>>s1>>s2;
+	dfs(s1,s2);
+	cout<<ans<<endl;
+    return 0;
+}
+
+
+
+
